@@ -1,0 +1,80 @@
+h1 {
+  color: #690303;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: 'Kavivanar', cursive;
+}
+
+body {
+  background-color: black;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  height: 900px;
+  .box {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid gray;
+    border-radius: 20px;
+    margin-top: 100px;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 454px;
+    img {
+      border: 2px solid black;
+      border-radius: 20px;
+      opacity: 0.5;
+      transition: 0.25s ease-in-out;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    div {
+      width: 400px;
+      margin-left: 15px;
+    }
+  }
+}
+
+.genres {
+  display: flex;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.info {
+  margin-top: 10px;
+}
+
+.title {
+  margin-top: 10px;
+}
+
+.link {
+  top: 20px;
+  &:hover {
+    font-size: 26px;
+  }
+}
+
+.infoBox {
+  height: 450px;
+  transition: 0.25s ease-in-out;
+  background-color: black;
+  opacity: 0.5;
+  border: 2px solid black;
+  border-radius: 20px;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+
+
+
