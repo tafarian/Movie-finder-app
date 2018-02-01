@@ -16,22 +16,21 @@ document.addEventListener('DOMContentLoaded', function(){
         url = "https://api.themoviedb.org/3/movie/";
         state = {
             movie: null,
+            vote: null,
         };
 
         componentDidMount() {
             fetch(this.url + Math.floor((Math.random() * 1000) + 1) + "?api_key=cda367df530b14c8f4c9004a192e9295&language=en-US")
                 .then(resp => resp.json())
                 .then(resp => {
-                    console.log(resp);
                     this.setState({
                         movie: resp,
                     })
                 });
-            if (this.state.movie === null ) {
+            if (this.state.movie === null) {
                 fetch(this.url + Math.floor((Math.random() * 1000) + 1) + "?api_key=cda367df530b14c8f4c9004a192e9295&language=en-US")
                     .then(resp => resp.json())
                     .then(resp => {
-                        console.log(resp);
                         this.setState({
                             movie: resp,
                         })
@@ -60,9 +59,10 @@ document.addEventListener('DOMContentLoaded', function(){
                                 <h1>Genres :</h1>{ genres }
                             </div>
                             <div className="genres">
-                                <h1>Rating :</h1><p className="genres">{ this.state.movie.vote_average }/10</p>
+                                <h1>Rating :</h1><p className=" rating">{ this.state.movie.vote_average }/10</p>
                             </div>
-                            <p className="info">Overview : { this.state.movie.overview }</p>
+                            <p className="info"
+                               style={{fontSize: "15px"}}><h1>Overview :</h1> { this.state.movie.overview }</p>
                             <a className="link" target="_blank" href={"http://www.imdb.com/title/" + this.state.movie.imdb_id }>Link to IMBd</a>
                         </div>
                     </div>
@@ -75,11 +75,29 @@ document.addEventListener('DOMContentLoaded', function(){
 
         handleClick = () => {
             location.href=location.href
-        }
+        };
 
         render() {
             return (
-                <button onClick={ this.handleClick }>Click to find random movie</button>
+                <button className="roller" onClick={ this.handleClick }>Click to find random movie</button>
+            )
+        }
+    }
+
+    class Input extends React.Component {
+
+        handleClick = (event) => {
+            event.preventDefault()
+        };
+
+        render() {
+            return (
+                <form>
+                    <input></input>
+                    <button onClick={ this.handleClick }>
+                        Send
+                    </button>
+                </form>
             )
         }
     }
@@ -90,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 <div className="container">
                     <MovieFinder/>
                     <Button />
+                    <Input />
                 </div>
             )
         }

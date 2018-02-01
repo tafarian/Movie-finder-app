@@ -1,5 +1,6 @@
 h1 {
-  color: #690303; }
+  color: #690303;
+  font-size: 16px; }
 
 * {
   margin: 0;
@@ -35,9 +36,12 @@ section {
 
 .genres {
   display: flex;
-  margin-top: 5px;
   margin-left: 10px;
-  font-size: 20px; }
+  font-size: 15px; }
+
+.rating {
+  color: yellow;
+  margin-left: 10px; }
 
 .info {
   margin-top: 10px; }
@@ -69,7 +73,7 @@ section {
     color: red; }
   100% {
     color: #690303; } }
-button {
+.roller {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -78,5 +82,18 @@ button {
   left: 20px;
   background-color: #3b3b3b;
   color: #ffffff; }
+
+input {
+  position: absolute;
+  top: 20px;
+  left: 120px;
+  color: black; }
+
+button {
+  position: absolute;
+  top: 20px;
+  left: 273px;
+  height: 24px;
+  background-color: #3b3b3b; }
 
 /*# sourceMappingURL=style.css.map */
