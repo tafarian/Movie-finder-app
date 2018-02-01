@@ -11,6 +11,9 @@ h1 {
 body {
   background-color: black; }
 
+.overview {
+  color: #690303; }
+
 section {
   display: flex;
   justify-content: center;
@@ -74,14 +77,15 @@ section {
   100% {
     color: #690303; } }
 .roller {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   position: absolute;
   top: 20px;
   left: 20px;
   background-color: #3b3b3b;
-  color: #ffffff; }
+  color: #ffffff;
+  font-size: 10px; }
 
 input {
   position: absolute;

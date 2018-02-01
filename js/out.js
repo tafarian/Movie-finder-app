@@ -13707,8 +13707,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { className: 'info',
                                     style: { fontSize: "15px" } },
                                 _react2.default.createElement(
-                                    'h1',
-                                    null,
+                                    'span',
+                                    { className: 'overview' },
                                     'Overview :'
                                 ),
                                 ' ',
@@ -13775,8 +13775,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 args[_key3] = arguments[_key3];
             }
 
-            return _ret3 = (_temp3 = (_this4 = _possibleConstructorReturn(this, (_ref3 = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref3, [this].concat(args))), _this4), _this4.handleClick = function (event) {
+            return _ret3 = (_temp3 = (_this4 = _possibleConstructorReturn(this, (_ref3 = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref3, [this].concat(args))), _this4), _this4.state = {
+                value: ''
+            }, _this4.handleClick = function (event) {
                 event.preventDefault();
+                _this4.setState({
+                    value: ''
+                });
+            }, _this4.onChange = function (event) {
+                _this4.setState({
+                    value: event.target.value
+                });
             }, _temp3), _possibleConstructorReturn(_this4, _ret3);
         }
 
@@ -13786,11 +13795,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 return _react2.default.createElement(
                     'form',
                     null,
-                    _react2.default.createElement('input', null),
+                    _react2.default.createElement('input', { value: this.state.value,
+                        onChange: this.onChange }),
                     _react2.default.createElement(
                         'button',
                         { onClick: this.handleClick },
-                        'Send'
+                        'Search by genre'
                     )
                 );
             }
@@ -24902,7 +24912,7 @@ exports = module.exports = __webpack_require__(217)(false);
 
 
 // module
-exports.push([module.i, "h1 {\n  color: #690303;\n  font-size: 16px; }\n\n* {\n  margin: 0;\n  padding: 0;\n  color: white;\n  font-family: 'Kavivanar', cursive; }\n\nbody {\n  background-color: black; }\n\nsection {\n  display: flex;\n  justify-content: center;\n  height: 1000px; }\n  section .box {\n    display: flex;\n    align-items: flex-start;\n    border: 1px solid gray;\n    border-radius: 20px;\n    margin-top: 100px;\n    background-color: rgba(0, 0, 0, 0.3);\n    height: 454px; }\n    section .box img {\n      border: 2px solid black;\n      border-radius: 20px;\n      opacity: 0.5;\n      transition: 0.25s ease-in-out; }\n      section .box img:hover {\n        opacity: 1; }\n    section .box div {\n      width: 400px;\n      margin-left: 15px; }\n\n.genres {\n  display: flex;\n  margin-left: 10px;\n  font-size: 15px; }\n\n.rating {\n  color: yellow;\n  margin-left: 10px; }\n\n.info {\n  margin-top: 10px; }\n\n.title {\n  margin-top: 10px; }\n\n.link {\n  top: 20px;\n  animation-name: colorChanger;\n  animation-duration: 1s;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out; }\n\n.infoBox {\n  height: 450px;\n  transition: 0.25s ease-in-out;\n  background-color: black;\n  opacity: 0.5;\n  border: 2px solid black;\n  border-radius: 20px; }\n  .infoBox:hover {\n    opacity: 1; }\n\n@keyframes colorChanger {\n  0% {\n    color: #690303; }\n  50% {\n    color: red; }\n  100% {\n    color: #690303; } }\n\n.roller {\n  width: 100px;\n  height: 100px;\n  border-radius: 50%;\n  position: absolute;\n  top: 20px;\n  left: 20px;\n  background-color: #3b3b3b;\n  color: #ffffff; }\n\ninput {\n  position: absolute;\n  top: 20px;\n  left: 120px;\n  color: black; }\n\nbutton {\n  position: absolute;\n  top: 20px;\n  left: 273px;\n  height: 24px;\n  background-color: #3b3b3b; }\n", ""]);
+exports.push([module.i, "h1 {\n  color: #690303;\n  font-size: 16px; }\n\n* {\n  margin: 0;\n  padding: 0;\n  color: white;\n  font-family: 'Kavivanar', cursive; }\n\nbody {\n  background-color: black; }\n\n.overview {\n  color: #690303; }\n\nsection {\n  display: flex;\n  justify-content: center;\n  height: 1000px; }\n  section .box {\n    display: flex;\n    align-items: flex-start;\n    border: 1px solid gray;\n    border-radius: 20px;\n    margin-top: 100px;\n    background-color: rgba(0, 0, 0, 0.3);\n    height: 454px; }\n    section .box img {\n      border: 2px solid black;\n      border-radius: 20px;\n      opacity: 0.5;\n      transition: 0.25s ease-in-out; }\n      section .box img:hover {\n        opacity: 1; }\n    section .box div {\n      width: 400px;\n      margin-left: 15px; }\n\n.genres {\n  display: flex;\n  margin-left: 10px;\n  font-size: 15px; }\n\n.rating {\n  color: yellow;\n  margin-left: 10px; }\n\n.info {\n  margin-top: 10px; }\n\n.title {\n  margin-top: 10px; }\n\n.link {\n  top: 20px;\n  animation-name: colorChanger;\n  animation-duration: 1s;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out; }\n\n.infoBox {\n  height: 450px;\n  transition: 0.25s ease-in-out;\n  background-color: black;\n  opacity: 0.5;\n  border: 2px solid black;\n  border-radius: 20px; }\n  .infoBox:hover {\n    opacity: 1; }\n\n@keyframes colorChanger {\n  0% {\n    color: #690303; }\n  50% {\n    color: red; }\n  100% {\n    color: #690303; } }\n\n.roller {\n  width: 75px;\n  height: 75px;\n  border-radius: 50%;\n  position: absolute;\n  top: 20px;\n  left: 20px;\n  background-color: #3b3b3b;\n  color: #ffffff;\n  font-size: 10px; }\n\ninput {\n  position: absolute;\n  top: 20px;\n  left: 120px;\n  color: black; }\n\nbutton {\n  position: absolute;\n  top: 20px;\n  left: 273px;\n  height: 24px;\n  background-color: #3b3b3b; }\n", ""]);
 
 // exports
 

@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function(){
                                 <h1>Rating :</h1><p className=" rating">{ this.state.movie.vote_average }/10</p>
                             </div>
                             <p className="info"
-                               style={{fontSize: "15px"}}><h1>Overview :</h1> { this.state.movie.overview }</p>
+                               style={{fontSize: "15px"}}><span className="overview">Overview :</span> { this.state.movie.overview }</p>
                             <a className="link" target="_blank" href={"http://www.imdb.com/title/" + this.state.movie.imdb_id }>Link to IMBd</a>
                         </div>
                     </div>
@@ -85,17 +85,30 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     class Input extends React.Component {
+        state = {
+            value: '',
+        };
 
         handleClick = (event) => {
-            event.preventDefault()
+            event.preventDefault();
+            this.setState({
+                value: '',
+            });
+        };
+
+        onChange = (event) => {
+            this.setState({
+                value: event.target.value
+            });
         };
 
         render() {
             return (
                 <form>
-                    <input></input>
+                    <input value={this.state.value}
+                           onChange={this.onChange}></input>
                     <button onClick={ this.handleClick }>
-                        Send
+                        Search by genre
                     </button>
                 </form>
             )
