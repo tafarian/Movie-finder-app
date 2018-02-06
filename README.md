@@ -3,7 +3,7 @@
 
 This app was made on Coderslab bootcamp as a final project.
 
-## Site preview
+## App preview
 
 You can check this app online, just hit the link below : 
 
