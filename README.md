@@ -19,3 +19,7 @@ HTML CSS JavaScript React API
 This site includes API from :
 
 https://www.themoviedb.org/
+
+#### Todo
+
+`- Searching by genre`
