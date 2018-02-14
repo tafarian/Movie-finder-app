@@ -13720,7 +13720,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 'Link to IMBd'
                             )
                         )
-                    )
+                    ),
+                    _react2.default.createElement(Button, null)
                 );
             }
         }]);
@@ -13743,7 +13744,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, (_ref2 = Button.__proto__ || Object.getPrototypeOf(Button)).call.apply(_ref2, [this].concat(args))), _this3), _this3.handleClick = function () {
-                location.href = location.href;
+                window.location.reload();
             }, _temp2), _possibleConstructorReturn(_this3, _ret2);
         }
 
@@ -13761,26 +13762,32 @@ document.addEventListener('DOMContentLoaded', function () {
         return Button;
     }(_react2.default.Component);
 
-    var Input = function (_React$Component3) {
-        _inherits(Input, _React$Component3);
+    var ByGenre = function (_React$Component3) {
+        _inherits(ByGenre, _React$Component3);
 
-        function Input() {
+        function ByGenre() {
             var _ref3;
 
             var _temp3, _this4, _ret3;
 
-            _classCallCheck(this, Input);
+            _classCallCheck(this, ByGenre);
 
             for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
                 args[_key3] = arguments[_key3];
             }
 
-            return _ret3 = (_temp3 = (_this4 = _possibleConstructorReturn(this, (_ref3 = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref3, [this].concat(args))), _this4), _this4.state = {
-                value: ''
+            return _ret3 = (_temp3 = (_this4 = _possibleConstructorReturn(this, (_ref3 = ByGenre.__proto__ || Object.getPrototypeOf(ByGenre)).call.apply(_ref3, [this].concat(args))), _this4), _this4.state = {
+                url: 'https://api.themoviedb.org/3/genre/movie/list?api_key=cda367df530b14c8f4c9004a192e9295&language=en-US',
+                value: '',
+                genres: null
             }, _this4.handleClick = function (event) {
                 event.preventDefault();
-                _this4.setState({
-                    value: ''
+                fetch(_this4.state.url).then(function (resp) {
+                    return resp.json();
+                }).then(function (resp) {
+                    _this4.setState({
+                        genres: resp
+                    });
                 });
             }, _this4.onChange = function (event) {
                 _this4.setState({
@@ -13789,14 +13796,47 @@ document.addEventListener('DOMContentLoaded', function () {
             }, _temp3), _possibleConstructorReturn(_this4, _ret3);
         }
 
-        _createClass(Input, [{
+        _createClass(ByGenre, [{
+            key: 'componentDidMount',
+            value: function componentDidMount() {
+                var _this5 = this;
+
+                fetch(this.state.url).then(function (resp) {
+                    return resp.json();
+                }).then(function (resp) {
+                    _this5.setState({
+                        genres: resp
+                    });
+                });
+            }
+        }, {
             key: 'render',
             value: function render() {
+
+                if (this.state.genres === null) {
+                    return _react2.default.createElement(
+                        'p',
+                        null,
+                        'Loading...'
+                    );
+                }
+
+                var genres = this.state.genres.genres.map(function (i) {
+                    return _react2.default.createElement(
+                        'option',
+                        { value: i.id, key: i.id },
+                        i.name
+                    );
+                });
+
                 return _react2.default.createElement(
                     'form',
                     null,
-                    _react2.default.createElement('input', { value: this.state.value,
-                        onChange: this.onChange }),
+                    _react2.default.createElement(
+                        'select',
+                        { onChange: this.onChange },
+                        genres
+                    ),
                     _react2.default.createElement(
                         'button',
                         { onClick: this.handleClick },
@@ -13806,11 +13846,116 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }]);
 
-        return Input;
+        return ByGenre;
     }(_react2.default.Component);
 
-    var App = function (_React$Component4) {
-        _inherits(App, _React$Component4);
+    var Menu = function (_React$Component4) {
+        _inherits(Menu, _React$Component4);
+
+        function Menu() {
+            _classCallCheck(this, Menu);
+
+            return _possibleConstructorReturn(this, (Menu.__proto__ || Object.getPrototypeOf(Menu)).apply(this, arguments));
+        }
+
+        _createClass(Menu, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'nav' },
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/' },
+                            'Home'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/randomizer' },
+                            'Randomizer'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/genre' },
+                            'Search by genre'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/aaa' },
+                            'Search by name'
+                        )
+                    )
+                );
+            }
+        }]);
+
+        return Menu;
+    }(_react2.default.Component);
+
+    var Home = function (_React$Component5) {
+        _inherits(Home, _React$Component5);
+
+        function Home() {
+            _classCallCheck(this, Home);
+
+            return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+        }
+
+        _createClass(Home, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    'Welcome to my site'
+                );
+            }
+        }]);
+
+        return Home;
+    }(_react2.default.Component);
+
+    var Template = function (_React$Component6) {
+        _inherits(Template, _React$Component6);
+
+        function Template() {
+            _classCallCheck(this, Template);
+
+            return _possibleConstructorReturn(this, (Template.__proto__ || Object.getPrototypeOf(Template)).apply(this, arguments));
+        }
+
+        _createClass(Template, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(Menu, null),
+                    this.props.children
+                );
+            }
+        }]);
+
+        return Template;
+    }(_react2.default.Component);
+
+    var App = function (_React$Component7) {
+        _inherits(App, _React$Component7);
 
         function App() {
             _classCallCheck(this, App);
@@ -13822,11 +13967,15 @@ document.addEventListener('DOMContentLoaded', function () {
             key: 'render',
             value: function render() {
                 return _react2.default.createElement(
-                    'div',
-                    { className: 'container' },
-                    _react2.default.createElement(MovieFinder, null),
-                    _react2.default.createElement(Button, null),
-                    _react2.default.createElement(Input, null)
+                    _reactRouter.Router,
+                    { history: _reactRouter.hashHistory },
+                    _react2.default.createElement(
+                        _reactRouter.Route,
+                        { path: '/', component: Template },
+                        _react2.default.createElement(_reactRouter.IndexRoute, { component: Home }),
+                        _react2.default.createElement(_reactRouter.Route, { path: '/randomizer', component: MovieFinder }),
+                        _react2.default.createElement(_reactRouter.Route, { path: '/genre', component: ByGenre })
+                    )
                 );
             }
         }]);
@@ -24912,7 +25061,7 @@ exports = module.exports = __webpack_require__(217)(false);
 
 
 // module
-exports.push([module.i, "h1 {\n  color: #690303;\n  font-size: 16px; }\n\n* {\n  margin: 0;\n  padding: 0;\n  color: white;\n  font-family: 'Kavivanar', cursive; }\n\nbody {\n  background-color: black; }\n\n.overview {\n  color: #690303; }\n\nsection {\n  display: flex;\n  justify-content: center;\n  height: 1000px; }\n  section .box {\n    display: flex;\n    align-items: flex-start;\n    border: 1px solid gray;\n    border-radius: 20px;\n    margin-top: 100px;\n    background-color: rgba(0, 0, 0, 0.3);\n    height: 454px; }\n    section .box img {\n      border: 2px solid black;\n      border-radius: 20px;\n      opacity: 0.5;\n      transition: 0.25s ease-in-out; }\n      section .box img:hover {\n        opacity: 1; }\n    section .box div {\n      width: 400px;\n      margin-left: 15px; }\n\n.genres {\n  display: flex;\n  margin-left: 10px;\n  font-size: 15px; }\n\n.rating {\n  color: yellow;\n  margin-left: 10px; }\n\n.info {\n  margin-top: 10px; }\n\n.title {\n  margin-top: 10px; }\n\n.link {\n  top: 20px;\n  animation-name: colorChanger;\n  animation-duration: 1s;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out; }\n\n.infoBox {\n  height: 450px;\n  transition: 0.25s ease-in-out;\n  background-color: black;\n  opacity: 0.5;\n  border: 2px solid black;\n  border-radius: 20px; }\n  .infoBox:hover {\n    opacity: 1; }\n\n@keyframes colorChanger {\n  0% {\n    color: #690303; }\n  50% {\n    color: red; }\n  100% {\n    color: #690303; } }\n\n.roller {\n  width: 75px;\n  height: 75px;\n  border-radius: 50%;\n  position: absolute;\n  top: 20px;\n  left: 20px;\n  background-color: #3b3b3b;\n  color: #ffffff;\n  font-size: 10px; }\n\ninput {\n  position: absolute;\n  top: 20px;\n  left: 120px;\n  color: black; }\n\nbutton {\n  position: absolute;\n  top: 20px;\n  left: 273px;\n  height: 24px;\n  background-color: #3b3b3b; }\n", ""]);
+exports.push([module.i, "h1 {\n  color: #690303;\n  font-size: 16px; }\n\n* {\n  margin: 0;\n  padding: 0;\n  color: white;\n  font-family: 'Kavivanar', cursive; }\n\nbody {\n  background-color: black; }\n\n.overview {\n  color: #690303; }\n\nsection {\n  display: flex;\n  justify-content: center;\n  height: 1000px; }\n  section .box {\n    display: flex;\n    align-items: flex-start;\n    border: 1px solid gray;\n    border-radius: 20px;\n    margin-top: 100px;\n    background-color: rgba(0, 0, 0, 0.3);\n    height: 454px; }\n    section .box img {\n      border: 2px solid black;\n      border-radius: 20px;\n      opacity: 0.5;\n      transition: 0.25s ease-in-out; }\n      section .box img:hover {\n        opacity: 1; }\n    section .box div {\n      width: 400px;\n      margin-left: 15px; }\n\n.genres {\n  display: flex;\n  margin-left: 10px;\n  font-size: 15px; }\n\n.rating {\n  color: yellow;\n  margin-left: 10px; }\n\n.info {\n  margin-top: 10px; }\n\n.title {\n  margin-top: 10px; }\n\n.link {\n  top: 20px;\n  animation-name: colorChanger;\n  animation-duration: 1s;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out; }\n\n.infoBox {\n  height: 450px;\n  transition: 0.25s ease-in-out;\n  background-color: black;\n  opacity: 0.5;\n  border: 2px solid black;\n  border-radius: 20px; }\n  .infoBox:hover {\n    opacity: 1; }\n\n@keyframes colorChanger {\n  0% {\n    color: #690303; }\n  50% {\n    color: red; }\n  100% {\n    color: #690303; } }\n\n.roller {\n  width: 75px;\n  height: 75px;\n  border-radius: 50%;\n  position: absolute;\n  top: 20px;\n  left: 20px;\n  background-color: #3b3b3b;\n  color: #ffffff;\n  font-size: 10px; }\n\nform {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-top: 15px; }\n\ninput {\n  color: black; }\n\nbutton {\n  background-color: #3b3b3b; }\n\n.nav {\n  display: flex;\n  justify-direction: row;\n  align-items: center;\n  justify-content: center; }\n  .nav p {\n    padding: 10px;\n    border: 1px solid white;\n    text-decoration: none; }\n\nselect {\n  background-color: #690303; }\n", ""]);
 
 // exports
 

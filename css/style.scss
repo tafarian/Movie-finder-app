@@ -104,17 +104,34 @@ section {
   font-size: 10px;
 };
 
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
 input {
-  position: absolute;
-  top: 20px;
-  left: 120px;
   color:black;
 }
 
 button {
-  position: absolute;
-  top: 20px;
-  left: 273px;
-  height: 24px;
   background-color: #3b3b3b;
+}
+
+
+.nav {
+  display: flex;
+  justify-direction: row;
+  align-items: center;
+  justify-content: center;
+  p {
+    padding: 10px;
+    border: 1px solid white;
+    text-decoration: none;
+  }
+}
+
+select {
+  background-color: #690303;
 }

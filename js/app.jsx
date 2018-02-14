@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             <a className="link" target="_blank" href={"http://www.imdb.com/title/" + this.state.movie.imdb_id }>Link to IMBd</a>
                         </div>
                     </div>
+                    <Button />
                 </section>
             )
         }
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function(){
     class Button extends React.Component {
 
         handleClick = () => {
-            location.href=location.href
+            window.location.reload();
         };
 
         render() {
@@ -84,17 +85,35 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    class Input extends React.Component {
+    class ByGenre extends React.Component {
         state = {
+            url: 'https://api.themoviedb.org/3/genre/movie/list?api_key=cda367df530b14c8f4c9004a192e9295&language=en-US',
             value: '',
+            genres: null,
         };
+
+        componentDidMount() {
+            fetch(this.state.url)
+                .then(resp => resp.json())
+                .then(resp => {
+                    this.setState({
+                        genres: resp,
+                    });
+                });
+        }
+
 
         handleClick = (event) => {
             event.preventDefault();
-            this.setState({
-                value: '',
-            });
+            fetch(this.state.url)
+                .then(resp => resp.json())
+                .then(resp => {
+                    this.setState({
+                        genres: resp,
+                    });
+                });
         };
+
 
         onChange = (event) => {
             this.setState({
@@ -103,10 +122,22 @@ document.addEventListener('DOMContentLoaded', function(){
         };
 
         render() {
+
+            if (this.state.genres === null) {
+                return <p>Loading...</p>
+            }
+
+            const genres = this.state.genres.genres.map(i => {
+                return (
+                    <option value={ i.id } key={ i.id }>{ i.name }</option>
+                );
+            });
+
             return (
                 <form>
-                    <input value={this.state.value}
-                           onChange={this.onChange}></input>
+                    <select onChange={ this.onChange }>
+                        { genres }
+                    </select>
                     <button onClick={ this.handleClick }>
                         Search by genre
                     </button>
@@ -115,14 +146,50 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
+    class Menu extends React.Component {
+        render() {
+            return (
+                <div className="nav">
+                    <p><Link to="/">Home</Link></p>
+                    <p><Link to="/randomizer">Randomizer</Link></p>
+                    <p><Link to="/genre">Search by genre</Link></p>
+                    <p><Link to="/aaa">Search by name</Link></p>
+                </div>
+            )
+        }
+    }
+
+    class Home extends React.Component {
+        render() {
+            return (
+                <div>
+                    Welcome to my site
+                </div>
+            )
+        }
+    }
+
+    class Template extends React.Component {
+        render() {
+            return (
+                <div>
+                    <Menu />
+                    { this.props.children }
+                </div>
+            )
+        }
+    }
+
     class App extends React.Component {
         render() {
             return(
-                <div className="container">
-                    <MovieFinder/>
-                    <Button />
-                    <Input />
-                </div>
+                <Router history={hashHistory}>
+                    <Route path='/' component={Template}>
+                        <IndexRoute component={Home} />
+                        <Route path='/randomizer' component={MovieFinder} />
+                        <Route path='/genre' component={ByGenre} />
+                    </Route>
+                </Router>
             )
         }
     }
