@@ -22,4 +22,6 @@ https://www.themoviedb.org/
 
 #### Todo
 
-`- Searching by genre`
+- Searching by genre
+- Searching by name
+
